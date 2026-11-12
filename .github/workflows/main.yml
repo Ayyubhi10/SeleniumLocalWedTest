@@ -28,3 +28,12 @@ jobs:
 
       - name: Run Selenium TestNG tests
         run: mvn -B clean test -Dsurefire.suiteXmlFiles=testing.xml
+      - name: Upload TestNG Reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: selenium-test-reports
+          path: |
+            target/surefire-reports/
+            test-output/
+          if-no-files-found: warn
